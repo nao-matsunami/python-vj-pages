@@ -1,0 +1,49 @@
+{
+  "date": "2026-08-09",
+  "headline": "Procedural Matte Field",
+  "headlineEn": "Procedural Matte Field",
+  "summary": "Python VJ Siteの最初のフレーム。Pillow/OpenCVで固定FPS連番を生成する前提の、ノイズ、波形、マスク向け抽象ループ。",
+  "summaryEn": "Python VJ Siteの最初のフレーム。Pillow/OpenCVで固定FPS連番を生成する前提の、ノイズ、波形、マスク向け抽象ループ。",
+  "links": [
+    {
+      "label": "Today's sample",
+      "url": "../outputs/2026-08-09_procedural-matte-field.html"
+    },
+    {
+      "label": "Live preview",
+      "url": "../live.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    }
+  ],
+  "sections": [
+    {
+      "title": "今日の制作メモ",
+      "titleEn": "Production note",
+      "body": "Python/Pillow/OpenCVはブラウザよりも連番生成、画像処理、マスク、アルファ素材、バッチレンダーに向く。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4/MOVはMac mini上で固定FPS生成する運用にする。",
+      "bodyEn": "Python/Pillow/OpenCVはブラウザよりも連番生成、画像処理、マスク、アルファ素材、バッチレンダーに向く。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4/MOVはMac mini上で固定FPS生成する運用にする。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
+    },
+    {
+      "title": "販売用データへの展開",
+      "titleEn": "Sales package route",
+      "body": "Python VJ Site はGitHub Pages上では軽量なサンプルとして公開し、MP4、alpha MOV、プロジェクトファイルなどの重い販売データはGumroadまたはPatreonへ置く前提です。",
+      "bodyEn": "Python VJ Site is published on GitHub Pages as a lightweight sample. Heavy saleable files such as MP4, alpha MOV, and project files should live on Gumroad or Patreon."
+    }
+  ]
+}
