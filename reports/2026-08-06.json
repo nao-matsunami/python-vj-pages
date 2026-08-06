@@ -1,0 +1,71 @@
+{
+  "date": "2026-08-06",
+  "headline": "Frame Noise Bloom",
+  "headlineEn": "Frame Noise Bloom",
+  "summary": "ブラウザでは軽量プレビュー、Mac miniではMP4/MOV生成に使う日次素材。",
+  "summaryEn": "ブラウザでは軽量プレビュー、Mac miniではMP4/MOV生成に使う日次素材。",
+  "links": [
+    {
+      "label": "Today's sample",
+      "url": "../outputs/2026-08-06_frame-noise-bloom.html"
+    },
+    {
+      "label": "Live preview",
+      "url": "../live.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    },
+    {
+      "label": "Source label",
+      "url": "https://example.com/"
+    }
+  ],
+  "sections": [
+    {
+      "title": "今日の制作メモ",
+      "titleEn": "Production note",
+      "body": "画像処理系のVJ素材は、後からOpenCVフィルタやマット生成を足せるため、販売用パックの幅を広げやすい。",
+      "bodyEn": "画像処理系のVJ素材は、後からOpenCVフィルタやマット生成を足せるため、販売用パックの幅を広げやすい。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
+    },
+    {
+      "title": "Daily Research 2026-08-06",
+      "titleEn": "Daily Research 2026-08-06",
+      "body": "今日の検索では、軽量なWebプレビューはGitHub Pagesへ置き、販売用の高解像度MP4/MOVは外部販売先へ置く運用を継続する判断にした。",
+      "bodyEn": "今日の検索では、軽量なWebプレビューはGitHub Pagesへ置き、販売用の高解像度MP4/MOVは外部販売先へ置く運用を継続する判断にした。",
+      "links": [
+        {
+          "label": "Source label",
+          "url": "https://example.com/"
+        }
+      ]
+    },
+    {
+      "title": "今日のミニ試作候補",
+      "titleEn": "Today's mini prototype candidate",
+      "body": "Frame Noise Bloom を 20 秒でループするVJサンプルとして固定しました。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4やalpha MOVは選抜後にMac miniで固定FPSレンダーします。",
+      "bodyEn": "Frame Noise Bloom is fixed as a 20-second looping VJ sample. GitHub Pages carries the lightweight preview, while saleable MP4 and alpha MOV masters should be rendered later on the Mac mini at fixed FPS.",
+      "links": [
+        {
+          "label": "Today's sample",
+          "url": "../outputs/2026-08-06_frame-noise-bloom.html"
+        }
+      ]
+    }
+  ]
+}

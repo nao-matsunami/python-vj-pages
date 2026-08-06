@@ -16,9 +16,45 @@
       "date": "2026-08-09",
       "title": "Procedural Matte Field",
       "loopSeconds": 12,
-      "palette": [0.62, 0.9, 0.42, 0.2, 0.85, 0.72],
+      "palette": [
+        0.62,
+        0.9,
+        0.42,
+        0.2,
+        0.85,
+        0.72
+      ],
       "copy": "Python VJ Siteの最初のフレーム。Pillow/OpenCVで固定FPS連番を生成する前提の、ノイズ、波形、マスク向け抽象ループ。",
       "why": "Python/Pillow/OpenCVはブラウザよりも連番生成、画像処理、マスク、アルファ素材、バッチレンダーに向く。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4/MOVはMac mini上で固定FPS生成する運用にする。"
+    },
+    {
+      "date": "2026-08-06",
+      "title": "Frame Noise Bloom",
+      "loopSeconds": 20,
+      "palette": [
+        0.92,
+        0.258,
+        0.421,
+        0.256,
+        0.8,
+        0.274
+      ],
+      "copy": "ブラウザでは軽量プレビュー、Mac miniではMP4/MOV生成に使う日次素材。",
+      "why": "画像処理系のVJ素材は、後からOpenCVフィルタやマット生成を足せるため、販売用パックの幅を広げやすい。",
+      "research": [
+        {
+          "date": "2026-08-06",
+          "summary": "今日の検索では、軽量なWebプレビューはGitHub Pagesへ置き、販売用の高解像度MP4/MOVは外部販売先へ置く運用を継続する判断にした。",
+          "sources": [
+            {
+              "label": "Source label",
+              "url": "https://example.com/",
+              "note": "検索・確認した内容の短い要約。"
+            }
+          ],
+          "updatedAt": "2026-08-06T05:18:26.065Z"
+        }
+      ]
     }
   ]
 }
