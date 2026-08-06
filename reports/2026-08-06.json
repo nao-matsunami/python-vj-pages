@@ -58,8 +58,8 @@
     {
       "title": "今日のミニ試作候補",
       "titleEn": "Today's mini prototype candidate",
-      "body": "Frame Noise Bloom を 20 秒でループするVJサンプルとして固定しました。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4やalpha MOVは選抜後にMac miniで固定FPSレンダーします。",
-      "bodyEn": "Frame Noise Bloom is fixed as a 20-second looping VJ sample. GitHub Pages carries the lightweight preview, while saleable MP4 and alpha MOV masters should be rendered later on the Mac mini at fixed FPS.",
+      "body": "Frame Noise Bloom を 20 秒でループするPython生成パイプライン向けの独立プレビューとして固定しました。GitHub PagesではCanvasで同じ構図を軽量確認し、販売用MP4やalpha MOVはMac mini側でPython/Pillow/OpenCVの固定FPS書き出しへ展開する前提です。",
+      "bodyEn": "Frame Noise Bloom is fixed as a standalone 20-second preview for a Python generation pipeline. GitHub Pages uses Canvas for a lightweight browser preview of the same composition, while saleable MP4 or alpha MOV masters should be rendered on the Mac mini with Python, Pillow, or OpenCV at fixed FPS.",
       "links": [
         {
           "label": "Today's sample",

@@ -5,25 +5,260 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Frame Noise Bloom / Python VJ Site</title>
     <style>
-      :root { color-scheme: dark; --bg: #050607; --ink: #f4f7f8; --muted: #9aa7ac; --line: #263236; }
-      * { box-sizing: border-box; }
-      body { margin: 0; min-height: 100vh; background: var(--bg); color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
-      header { min-height: 104px; padding: 18px; border-bottom: 1px solid var(--line); display: flex; justify-content: space-between; gap: 16px; align-items: center; }
-      h1 { margin: 0; font-size: clamp(22px, 4vw, 42px); line-height: 1; }
-      p { margin: 6px 0 0; color: var(--muted); line-height: 1.6; }
-      a { color: var(--ink); }
-      iframe { display: block; width: 100%; height: calc(100vh - 104px); border: 0; background: #000; }
-      @media (max-width: 760px) { header { display: block; } iframe { height: calc(100vh - 142px); } }
+      :root {
+        color-scheme: dark;
+        --bg: #020303;
+        --ink: #f5fbfb;
+        --muted: #98a8aa;
+        --green: #84ff64;
+        --cyan: #3cf2ff;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        width: 100%;
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      canvas {
+        display: block;
+        width: 100vw;
+        height: 100vh;
+        background: #020303;
+      }
+
+      .hud {
+        position: fixed;
+        inset: 18px 18px auto;
+        z-index: 2;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        pointer-events: none;
+        text-shadow: 0 2px 18px rgba(0, 0, 0, 0.78);
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(21px, 4.2vw, 52px);
+        line-height: 0.96;
+        letter-spacing: 0;
+        text-transform: uppercase;
+      }
+
+      p {
+        margin: 8px 0 0;
+        color: var(--muted);
+        font-size: clamp(12px, 1.4vw, 15px);
+        line-height: 1.55;
+      }
+
+      a {
+        pointer-events: auto;
+        align-self: flex-start;
+        min-width: 112px;
+        padding: 10px 13px;
+        border: 1px solid rgba(245, 251, 251, 0.28);
+        background: rgba(2, 3, 3, 0.44);
+        color: var(--ink);
+        font-size: 12px;
+        line-height: 1;
+        text-align: center;
+        text-decoration: none;
+        backdrop-filter: blur(12px);
+      }
+
+      .meter {
+        position: fixed;
+        right: 18px;
+        bottom: 18px;
+        left: 18px;
+        z-index: 2;
+        height: 2px;
+        overflow: hidden;
+        background: rgba(245, 251, 251, 0.13);
+      }
+
+      .meter span {
+        display: block;
+        width: 100%;
+        height: 100%;
+        transform-origin: left center;
+        background: linear-gradient(90deg, var(--green), var(--cyan), #ff6a45);
+        animation: loop-meter 20s linear infinite;
+      }
+
+      @keyframes loop-meter {
+        from { transform: scaleX(0); }
+        to { transform: scaleX(1); }
+      }
+
+      @media (max-width: 680px) {
+        .hud {
+          display: block;
+        }
+
+        a {
+          display: inline-block;
+          margin-top: 12px;
+        }
+      }
     </style>
   </head>
   <body>
-    <header>
+    <canvas id="stage" aria-label="Frame Noise Bloom looping preview"></canvas>
+    <div class="hud">
       <div>
         <h1>Frame Noise Bloom</h1>
-        <p>2026-08-06 / Python VJ Site / 20s loop</p>
+        <p>Python pipeline preview / 2026-08-06 / locked 20 second loop</p>
       </div>
       <a href="../days/2026-08-06.html">Daily report</a>
-    </header>
-    <iframe src="../live.html?date=2026-08-06" title="Frame Noise Bloom live preview"></iframe>
+    </div>
+    <div class="meter" aria-hidden="true"><span></span></div>
+
+    <script>
+      const canvas = document.querySelector("#stage");
+      const ctx = canvas.getContext("2d", { alpha: false });
+      const loopSeconds = 20;
+      const particles = Array.from({ length: 210 }, (_, i) => ({
+        seed: i * 0.61803398875,
+        lane: i % 9,
+        radius: 0.05 + ((i * 41) % 100) / 100 * 0.72,
+      }));
+      let width = 1;
+      let height = 1;
+      let dpr = 1;
+      let start = performance.now();
+
+      window.addEventListener("resize", resize);
+      window.addEventListener("click", () => {
+        start = performance.now();
+      });
+
+      resize();
+      requestAnimationFrame(draw);
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        width = Math.max(1, window.innerWidth);
+        height = Math.max(1, window.innerHeight);
+        canvas.width = Math.floor(width * dpr);
+        canvas.height = Math.floor(height * dpr);
+        canvas.style.width = `${width}px`;
+        canvas.style.height = `${height}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+
+      function draw(now) {
+        const elapsed = (now - start) / 1000;
+        const cycle = (elapsed % loopSeconds) / loopSeconds;
+        const phase = cycle * Math.PI * 2;
+        const cx = width * 0.5;
+        const cy = height * 0.52;
+        const scale = Math.min(width, height);
+
+        ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = "#020303";
+        ctx.fillRect(0, 0, width, height);
+
+        drawNoiseField(cycle);
+        drawBloom(cx, cy, scale, phase);
+        drawFrames(cx, cy, scale, phase);
+        drawParticles(cx, cy, scale, phase);
+        drawLumaSweep(cycle, phase);
+
+        requestAnimationFrame(draw);
+      }
+
+      function drawNoiseField(cycle) {
+        const step = 18;
+        ctx.globalCompositeOperation = "source-over";
+        for (let y = 0; y < height; y += step) {
+          for (let x = 0; x < width; x += step) {
+            const n = Math.sin(x * 0.031 + y * 0.047 + cycle * Math.PI * 2) * Math.cos(x * 0.019 - y * 0.027 - cycle * Math.PI * 2);
+            const alpha = 0.035 + Math.abs(n) * 0.045;
+            ctx.fillStyle = `rgba(${40 + Math.abs(n) * 80}, ${180 + Math.abs(n) * 70}, ${190 + Math.abs(n) * 55}, ${alpha})`;
+            ctx.fillRect(x, y, step + 1, step + 1);
+          }
+        }
+      }
+
+      function drawBloom(cx, cy, scale, phase) {
+        ctx.globalCompositeOperation = "lighter";
+        for (let i = 0; i < 16; i += 1) {
+          const t = i / 15;
+          const radius = scale * (0.08 + t * 0.76 + Math.sin(phase + i) * 0.012);
+          const gradient = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius);
+          gradient.addColorStop(0, `rgba(132, 255, 100, ${0.08 * (1 - t)})`);
+          gradient.addColorStop(0.45, `rgba(60, 242, 255, ${0.025 * (1 - t)})`);
+          gradient.addColorStop(1, "rgba(2, 3, 3, 0)");
+          ctx.fillStyle = gradient;
+          ctx.fillRect(0, 0, width, height);
+        }
+      }
+
+      function drawFrames(cx, cy, scale, phase) {
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.rotate(Math.sin(phase) * 0.08);
+        ctx.globalCompositeOperation = "lighter";
+        ctx.lineWidth = Math.max(1, scale * 0.003);
+        for (let i = 0; i < 10; i += 1) {
+          const t = i / 10;
+          const w = scale * (0.24 + t * 1.06);
+          const h = scale * (0.14 + t * 0.58);
+          const alpha = 0.08 + (1 - t) * 0.34;
+          ctx.strokeStyle = i % 2 === 0 ? `rgba(132, 255, 100, ${alpha})` : `rgba(60, 242, 255, ${alpha})`;
+          ctx.strokeRect(-w / 2, -h / 2, w, h);
+        }
+        ctx.restore();
+      }
+
+      function drawParticles(cx, cy, scale, phase) {
+        ctx.globalCompositeOperation = "lighter";
+        particles.forEach((particle, index) => {
+          const angle = phase * (0.42 + particle.lane * 0.012) + particle.seed * Math.PI * 2;
+          const radius = scale * particle.radius;
+          const x = cx + Math.cos(angle) * radius * 1.55;
+          const y = cy + Math.sin(angle) * radius * 0.82;
+          const bloom = 0.5 + 0.5 * Math.sin(phase * 3 + index);
+          const size = 1.2 + (index % 6) * 0.7 + bloom * 3;
+          ctx.fillStyle = index % 4 === 0 ? `rgba(255, 106, 69, ${0.1 + bloom * 0.48})` : `rgba(245, 251, 251, ${0.08 + bloom * 0.36})`;
+          ctx.fillRect(x - size / 2, y - size / 2, size, size);
+        });
+      }
+
+      function drawLumaSweep(cycle, phase) {
+        ctx.globalCompositeOperation = "lighter";
+        const x = width * cycle;
+        const gradient = ctx.createLinearGradient(x - 180, 0, x + 180, 0);
+        gradient.addColorStop(0, "rgba(132, 255, 100, 0)");
+        gradient.addColorStop(0.5, "rgba(132, 255, 100, 0.18)");
+        gradient.addColorStop(1, "rgba(60, 242, 255, 0)");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(x - 180, 0, 360, height);
+
+        ctx.strokeStyle = `rgba(245, 251, 251, ${0.1 + Math.sin(phase * 5) * 0.04})`;
+        ctx.lineWidth = 1;
+        for (let row = 0; row < height; row += 9) {
+          ctx.beginPath();
+          ctx.moveTo(0, row + 0.5);
+          ctx.lineTo(width, row + 0.5);
+          ctx.stroke();
+        }
+      }
+    </script>
   </body>
 </html>
