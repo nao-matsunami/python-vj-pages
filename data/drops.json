@@ -13,6 +13,29 @@
   ],
   "drops": [
     {
+      "date": "2026-08-10",
+      "title": "Frame Noise Bloom",
+      "loopSeconds": 8,
+      "palette": [
+        0.92,
+        0.736,
+        0.258,
+        0.256,
+        0.799,
+        0.8
+      ],
+      "copy": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+      "why": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
+      "research": [
+        {
+          "date": "2026-08-10",
+          "summary": "Python VJ Site の日次レポートを追加。追加調査がある日は --notes-file で検索要約と出典を差し込む。",
+          "sources": [],
+          "updatedAt": "2026-08-10T06:28:00.053Z"
+        }
+      ]
+    },
+    {
       "date": "2026-08-09",
       "title": "Procedural Matte Field",
       "loopSeconds": 12,
