@@ -20,6 +20,14 @@
     {
       "label": "OpenCV Python Tutorials",
       "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
     }
   ],
   "sections": [
@@ -42,9 +50,18 @@
     {
       "title": "Daily Research 2026-08-10",
       "titleEn": "Daily Research 2026-08-10",
-      "body": "Python VJ Site の日次レポートを追加。追加調査がある日は --notes-file で検索要約と出典を差し込む。",
-      "bodyEn": "Python VJ Site の日次レポートを追加。追加調査がある日は --notes-file で検索要約と出典を差し込む。",
-      "links": []
+      "body": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+      "bodyEn": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
     },
     {
       "title": "今日のミニ試作候補",
