@@ -13,6 +13,40 @@
   ],
   "drops": [
     {
+      "date": "2026-08-12",
+      "title": "OpenCV Signal Mask",
+      "loopSeconds": 16,
+      "palette": [
+        0.92,
+        0.258,
+        0.354,
+        0.256,
+        0.8,
+        0.329
+      ],
+      "copy": "Pillow/OpenCVの画像処理に展開しやすい、販売用マスター生成向けサンプル。",
+      "why": "ブラウザのリアルタイム録画より、Pythonのオフライン生成の方がフレーム精度と再現性を管理しやすい。",
+      "research": [
+        {
+          "date": "2026-08-12",
+          "summary": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+          "sources": [
+            {
+              "label": "Pillow Documentation",
+              "url": "https://pillow.readthedocs.io/",
+              "note": "Python画像生成の基準。"
+            },
+            {
+              "label": "OpenCV Python Tutorials",
+              "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html",
+              "note": "画像処理と動画処理の確認に使う。"
+            }
+          ],
+          "updatedAt": "2026-08-11T21:45:15.442Z"
+        }
+      ]
+    },
+    {
       "date": "2026-08-11",
       "title": "Pillow Particle Raster",
       "loopSeconds": 20,
