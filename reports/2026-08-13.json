@@ -1,0 +1,79 @@
+{
+  "date": "2026-08-13",
+  "headline": "Procedural Matte Field",
+  "headlineEn": "Procedural Matte Field",
+  "summary": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+  "summaryEn": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+  "links": [
+    {
+      "label": "Today's sample",
+      "url": "../outputs/2026-08-13_procedural-matte-field.html"
+    },
+    {
+      "label": "Live preview",
+      "url": "../live.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    },
+    {
+      "label": "imageio documentation",
+      "url": "https://imageio.readthedocs.io/"
+    },
+    {
+      "label": "FFmpeg Documentation",
+      "url": "https://ffmpeg.org/documentation.html"
+    }
+  ],
+  "sections": [
+    {
+      "title": "今日の制作メモ",
+      "titleEn": "Production note",
+      "body": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
+      "bodyEn": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
+    },
+    {
+      "title": "Daily Research 2026-08-13",
+      "titleEn": "Daily Research 2026-08-13",
+      "body": "今日はPython側の動画書き出し前提を重視した。ブラウザプレビューは軽く見せ、Mac miniでは固定FPS連番からMP4/MOVへ変換する構成が現実的。",
+      "bodyEn": "今日はPython側の動画書き出し前提を重視した。ブラウザプレビューは軽く見せ、Mac miniでは固定FPS連番からMP4/MOVへ変換する構成が現実的。",
+      "links": [
+        {
+          "label": "imageio documentation",
+          "url": "https://imageio.readthedocs.io/"
+        },
+        {
+          "label": "FFmpeg Documentation",
+          "url": "https://ffmpeg.org/documentation.html"
+        }
+      ]
+    },
+    {
+      "title": "今日のミニ試作候補",
+      "titleEn": "Today's mini prototype candidate",
+      "body": "Procedural Matte Field を 12 秒でループするVJサンプルとして固定しました。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4やalpha MOVは選抜後にMac miniで固定FPSレンダーします。",
+      "bodyEn": "Procedural Matte Field is fixed as a 12-second looping VJ sample. GitHub Pages carries the lightweight preview, while saleable MP4 and alpha MOV masters should be rendered later on the Mac mini at fixed FPS.",
+      "links": [
+        {
+          "label": "Today's sample",
+          "url": "../outputs/2026-08-13_procedural-matte-field.html"
+        }
+      ]
+    }
+  ]
+}
