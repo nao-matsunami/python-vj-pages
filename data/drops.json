@@ -13,6 +13,40 @@
   ],
   "drops": [
     {
+      "date": "2026-08-16",
+      "title": "Procedural Matte Field",
+      "loopSeconds": 16,
+      "palette": [
+        0.529,
+        0.92,
+        0.258,
+        0.256,
+        0.327,
+        0.8
+      ],
+      "copy": "ブラウザでは軽量プレビュー、Mac miniではMP4/MOV生成に使う日次素材。",
+      "why": "画像処理系のVJ素材は、後からOpenCVフィルタやマット生成を足せるため、販売用パックの幅を広げやすい。",
+      "research": [
+        {
+          "date": "2026-08-16",
+          "summary": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+          "sources": [
+            {
+              "label": "Pillow Documentation",
+              "url": "https://pillow.readthedocs.io/",
+              "note": "Python画像生成の基準。"
+            },
+            {
+              "label": "OpenCV Python Tutorials",
+              "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html",
+              "note": "画像処理と動画処理の確認に使う。"
+            }
+          ],
+          "updatedAt": "2026-08-15T21:45:19.676Z"
+        }
+      ]
+    },
+    {
       "date": "2026-08-15",
       "title": "OpenCV Signal Mask",
       "loopSeconds": 20,
