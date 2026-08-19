@@ -54,6 +54,7 @@ function draw(now) {
 function renderFrame(target, width, height, piece, phase, alpha) {
   const seed = hash(`${piece.date}:${piece.title}`);
   const variant = pieceVariant(piece);
+  const engine = pieceEngine(piece);
   const minSide = Math.min(width, height);
   const paletteA = rgb(piece.palette.slice(0, 3));
   const paletteB = rgb(piece.palette.slice(3, 6));
@@ -61,6 +62,11 @@ function renderFrame(target, width, height, piece, phase, alpha) {
   if (!alpha) {
     target.fillStyle = "#020303";
     target.fillRect(0, 0, width, height);
+  }
+
+  if (engine !== "pixel-field") {
+    drawPythonEngine(target, engine, width, height, piece, phase, alpha, seed, minSide, paletteA, paletteB);
+    return;
   }
 
   const image = target.getImageData(0, 0, width, height);
@@ -123,6 +129,45 @@ function renderFrame(target, width, height, piece, phase, alpha) {
     target.fill();
   }
   drawPythonVariant(target, variant, phase, seed, minSide, paletteA, paletteB);
+  target.restore();
+}
+
+function drawPythonEngine(target, engine, width, height, piece, phase, alpha, seed, minSide, paletteA, paletteB) {
+  const cx = width / 2;
+  const cy = height / 2;
+  target.save();
+  target.translate(cx, cy);
+  target.globalCompositeOperation = "lighter";
+  if (engine === "matte-contours") {
+    for (let i = 0; i < 18; i += 1) {
+      const t = i / 18;
+      const radius = minSide * (0.08 + t * 0.44 + Math.sin(phase + i) * 0.012);
+      target.strokeStyle = i % 2 ? `rgba(${paletteA.join(", ")}, ${alpha ? 0.82 : 0.32})` : `rgba(${paletteB.join(", ")}, ${alpha ? 0.82 : 0.32})`;
+      target.lineWidth = Math.max(1, minSide * (0.002 + t * 0.004));
+      target.beginPath();
+      target.ellipse(0, 0, radius * (1.2 + 0.2 * Math.sin(phase)), radius * 0.62, phase * 0.18 + i * 0.1, 0, Math.PI * 2);
+      target.stroke();
+    }
+  } else if (engine === "opencv-bars") {
+    for (let i = 0; i < 48; i += 1) {
+      const x = (i / 47 - 0.5) * minSide * 1.1;
+      const wave = 0.5 + 0.5 * Math.sin(phase * 3 + i * 0.5 + seed * 0.01);
+      target.globalAlpha = 0.12 + wave * 0.45;
+      target.fillStyle = i % 2 ? `rgb(${paletteA.join(", ")})` : `rgb(${paletteB.join(", ")})`;
+      target.fillRect(x, -minSide * 0.42 * wave, minSide * 0.012, minSide * 0.84 * wave);
+    }
+  } else {
+    for (let i = 0; i < 140; i += 1) {
+      const t = i / 140;
+      const angle = t * Math.PI * 2 + phase * (1 + (i % 5) * 0.04);
+      const r = minSide * (0.1 + ((i * 29 + seed) % 100) / 100 * 0.42);
+      target.globalAlpha = 0.22;
+      target.fillStyle = i % 2 ? `rgb(${paletteA.join(", ")})` : `rgb(${paletteB.join(", ")})`;
+      target.beginPath();
+      target.arc(Math.cos(angle) * r, Math.sin(angle * 0.82) * r, minSide * (0.004 + (i % 6) * 0.002), 0, Math.PI * 2);
+      target.fill();
+    }
+  }
   target.restore();
 }
 
@@ -397,11 +442,15 @@ function pieceVariant(piece) {
   if (title.includes("pillow") || title.includes("particle")) return 3;
   return hash(`${piece.date}:${piece.title}:python`) % 4;
 }
+function pieceEngine(piece) {
+  return piece.engine || "pixel-field";
+}
 function makeRecipe(piece) {
   return `# Daily Python VJ Loop
 # Date: ${piece.date}
 # Title: ${piece.title}
 # Loop seconds: ${piece.loopSeconds}
+# Engine: ${pieceEngine(piece)}
 # Variant: ${pieceVariant(piece)}
 # Pipeline: Pillow / OpenCV fixed-FPS frame generation
 # Palette A: ${rgb(piece.palette.slice(0, 3)).join(", ")}

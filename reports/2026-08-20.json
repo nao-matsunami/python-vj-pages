@@ -2,8 +2,8 @@
   "date": "2026-08-20",
   "headline": "Alpha Contour Drift",
   "headlineEn": "Alpha Contour Drift",
-  "summary": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
-  "summaryEn": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+  "summary": "輪郭線と楕円マスクを主役にしたPython系VJループ。",
+  "summaryEn": "輪郭線と楕円マスクを主役にしたPython系VJループ。",
   "links": [
     {
       "label": "Today's sample",
@@ -34,8 +34,8 @@
     {
       "title": "今日の制作メモ",
       "titleEn": "Production note",
-      "body": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
-      "bodyEn": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
+      "body": "黒抜きやアルファMOV向けに、輪郭の明瞭な素材ラインを作る。",
+      "bodyEn": "黒抜きやアルファMOV向けに、輪郭の明瞭な素材ラインを作る。",
       "links": [
         {
           "label": "Pillow Documentation",

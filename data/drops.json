@@ -15,6 +15,7 @@
     {
       "date": "2026-08-20",
       "title": "Alpha Contour Drift",
+      "engine": "matte-contours",
       "loopSeconds": 12,
       "palette": [
         0.258,
@@ -24,8 +25,8 @@
         0.256,
         0.8
       ],
-      "copy": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
-      "why": "Python/Pillow/OpenCVは連番画像、マスク、アルファ素材、バッチ処理に向く。販売用マスターをMac miniで固定FPS生成する前提にしている。",
+      "copy": "輪郭線と楕円マスクを主役にしたPython系VJループ。",
+      "why": "黒抜きやアルファMOV向けに、輪郭の明瞭な素材ラインを作る。",
       "research": [
         {
           "date": "2026-08-20",
@@ -42,7 +43,7 @@
               "note": "MP4/MOV変換の基準。"
             }
           ],
-          "updatedAt": "2026-08-19T21:45:14.618Z"
+          "updatedAt": "2026-08-19T23:37:23.433Z"
         }
       ]
     },
