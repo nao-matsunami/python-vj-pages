@@ -53,6 +53,7 @@ function draw(now) {
 
 function renderFrame(target, width, height, piece, phase, alpha) {
   const seed = hash(`${piece.date}:${piece.title}`);
+  const variant = pieceVariant(piece);
   const minSide = Math.min(width, height);
   const paletteA = rgb(piece.palette.slice(0, 3));
   const paletteB = rgb(piece.palette.slice(3, 6));
@@ -73,8 +74,18 @@ function renderFrame(target, width, height, piece, phase, alpha) {
       const ny = (y - cy) / minSide;
       const r = Math.hypot(nx, ny);
       const a = Math.atan2(ny, nx);
-      const wave = Math.sin(r * 42 - phase * 3 + Math.sin(a * 6 + phase) * 2);
-      const grid = Math.sin((nx + Math.sin(phase) * 0.08) * 48) * Math.sin((ny + Math.cos(phase) * 0.08) * 48);
+      let wave = Math.sin(r * 42 - phase * 3 + Math.sin(a * 6 + phase) * 2);
+      let grid = Math.sin((nx + Math.sin(phase) * 0.08) * 48) * Math.sin((ny + Math.cos(phase) * 0.08) * 48);
+      if (variant === 1) {
+        wave = Math.sin((Math.abs(nx) + Math.abs(ny)) * 58 - phase * 4);
+        grid = Math.cos(a * 12 + phase * 2) * Math.sin(r * 34 + phase);
+      } else if (variant === 2) {
+        wave = Math.sin(nx * 72 + phase * 2) * Math.cos(ny * 24 - phase * 3);
+        grid = Math.sin((r + Math.sin(a * 5) * 0.08) * 64 - phase * 2);
+      } else if (variant === 3) {
+        wave = Math.sin((Math.floor((nx + 0.5) * 12.0) + Math.floor((ny + 0.5) * 9.0)) + phase * 4);
+        grid = Math.sin(a * 5 + phase) * Math.cos(r * 50 - phase);
+      }
       const mask = smoothstep(0.72, 0.08, r);
       const v = Math.max(0, wave * 0.55 + grid * 0.45) * mask;
       if (v <= 0.03) continue;
@@ -111,7 +122,45 @@ function renderFrame(target, width, height, piece, phase, alpha) {
     target.arc(x, y, minSide * (0.008 + (i % 5) * 0.003), 0, Math.PI * 2);
     target.fill();
   }
+  drawPythonVariant(target, variant, phase, seed, minSide, paletteA, paletteB);
   target.restore();
+}
+
+function drawPythonVariant(target, variant, phase, seed, minSide, paletteA, paletteB) {
+  if (variant === 0) return;
+  target.globalCompositeOperation = "lighter";
+  if (variant === 1) {
+    target.strokeStyle = `rgba(${paletteA.join(", ")}, 0.34)`;
+    target.lineWidth = Math.max(1, minSide * 0.003);
+    for (let i = 0; i < 18; i += 1) {
+      const r = minSide * (0.08 + i * 0.018);
+      target.beginPath();
+      target.rect(-r * 1.45, -r, r * 2.9, r * 2);
+      target.stroke();
+      target.rotate(phase * 0.035 + 0.08);
+    }
+  } else if (variant === 2) {
+    for (let i = 0; i < 40; i += 1) {
+      const t = (i + (seed % 17)) / 40;
+      const x = (t - 0.5) * minSide * 1.1;
+      const h = minSide * (0.08 + 0.34 * (0.5 + 0.5 * Math.sin(phase * 2 + i)));
+      target.strokeStyle = i % 2 ? `rgba(${paletteA.join(", ")}, 0.28)` : `rgba(${paletteB.join(", ")}, 0.28)`;
+      target.lineWidth = Math.max(1, minSide * 0.006);
+      target.beginPath();
+      target.moveTo(x, -h);
+      target.lineTo(x + Math.sin(phase + i) * minSide * 0.04, h);
+      target.stroke();
+    }
+  } else {
+    target.strokeStyle = `rgba(${paletteB.join(", ")}, 0.36)`;
+    target.lineWidth = Math.max(1, minSide * 0.002);
+    for (let i = 0; i < 9; i += 1) {
+      const s = minSide * (0.14 + i * 0.035);
+      target.beginPath();
+      target.ellipse(0, 0, s * 1.35, s * 0.72, phase + i * 0.35, 0, Math.PI * 2);
+      target.stroke();
+    }
+  }
 }
 
 function resize() {
@@ -341,11 +390,19 @@ function pickPiece(date) {
     why: "Python/Pillow/OpenCVはオフラインで連番画像、マスク、グリッチ、アルファ素材を作るのに向く。GitHub Pagesでは軽いプレビューだけを見せる。",
   };
 }
+function pieceVariant(piece) {
+  const title = String(piece.title || "").toLowerCase();
+  if (title.includes("matte") || title.includes("contour")) return 1;
+  if (title.includes("opencv") || title.includes("signal")) return 2;
+  if (title.includes("pillow") || title.includes("particle")) return 3;
+  return hash(`${piece.date}:${piece.title}:python`) % 4;
+}
 function makeRecipe(piece) {
   return `# Daily Python VJ Loop
 # Date: ${piece.date}
 # Title: ${piece.title}
 # Loop seconds: ${piece.loopSeconds}
+# Variant: ${pieceVariant(piece)}
 # Pipeline: Pillow / OpenCV fixed-FPS frame generation
 # Palette A: ${rgb(piece.palette.slice(0, 3)).join(", ")}
 # Palette B: ${rgb(piece.palette.slice(3, 6)).join(", ")}
