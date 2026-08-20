@@ -1,0 +1,79 @@
+{
+  "date": "2026-08-21",
+  "headline": "Alpha Contour Drift",
+  "headlineEn": "Alpha Contour Drift",
+  "summary": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+  "summaryEn": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+  "links": [
+    {
+      "label": "Today's sample",
+      "url": "../outputs/2026-08-21_alpha-contour-drift.html"
+    },
+    {
+      "label": "Live preview",
+      "url": "../live.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    },
+    {
+      "label": "Pillow Documentation",
+      "url": "https://pillow.readthedocs.io/"
+    },
+    {
+      "label": "OpenCV Python Tutorials",
+      "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+    }
+  ],
+  "sections": [
+    {
+      "title": "今日の制作メモ",
+      "titleEn": "Production note",
+      "body": "既存系列として、ピクセル処理、波形、マスクを増やす。販売用マスター生成へ接続しやすい。",
+      "bodyEn": "既存系列として、ピクセル処理、波形、マスクを増やす。販売用マスター生成へ接続しやすい。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
+    },
+    {
+      "title": "Daily Research 2026-08-21",
+      "titleEn": "Daily Research 2026-08-21",
+      "body": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+      "bodyEn": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+      "links": [
+        {
+          "label": "Pillow Documentation",
+          "url": "https://pillow.readthedocs.io/"
+        },
+        {
+          "label": "OpenCV Python Tutorials",
+          "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html"
+        }
+      ]
+    },
+    {
+      "title": "今日のミニ試作候補",
+      "titleEn": "Today's mini prototype candidate",
+      "body": "Alpha Contour Drift を 8 秒でループするVJサンプルとして固定しました。GitHub Pagesでは軽量プレビューを見せ、販売用のMP4やalpha MOVは選抜後にMac miniで固定FPSレンダーします。",
+      "bodyEn": "Alpha Contour Drift is fixed as a 8-second looping VJ sample. GitHub Pages carries the lightweight preview, while saleable MP4 and alpha MOV masters should be rendered later on the Mac mini at fixed FPS.",
+      "links": [
+        {
+          "label": "Today's sample",
+          "url": "../outputs/2026-08-21_alpha-contour-drift.html"
+        }
+      ]
+    }
+  ]
+}

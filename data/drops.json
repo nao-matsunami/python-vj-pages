@@ -13,6 +13,41 @@
   ],
   "drops": [
     {
+      "date": "2026-08-21",
+      "title": "Alpha Contour Drift",
+      "engine": "pixel-field",
+      "loopSeconds": 8,
+      "palette": [
+        0.92,
+        0.258,
+        0.797,
+        0.546,
+        0.8,
+        0.256
+      ],
+      "copy": "Pythonで固定FPS連番生成する前提の、ノイズとマスク向け抽象VJループ。",
+      "why": "既存系列として、ピクセル処理、波形、マスクを増やす。販売用マスター生成へ接続しやすい。",
+      "research": [
+        {
+          "date": "2026-08-21",
+          "summary": "今日はPythonをオフライン生成の軸として見た。PillowやOpenCVで連番、マスク、アルファ素材を作れるため、ブラウザRECよりも販売用マスターの再現性を管理しやすい。",
+          "sources": [
+            {
+              "label": "Pillow Documentation",
+              "url": "https://pillow.readthedocs.io/",
+              "note": "Python画像生成の基準。"
+            },
+            {
+              "label": "OpenCV Python Tutorials",
+              "url": "https://docs.opencv.org/4.x/d6/d00/tutorial_py_root.html",
+              "note": "画像処理と動画処理の確認に使う。"
+            }
+          ],
+          "updatedAt": "2026-08-20T21:45:18.108Z"
+        }
+      ]
+    },
+    {
       "date": "2026-08-20",
       "title": "Alpha Contour Drift",
       "engine": "matte-contours",
